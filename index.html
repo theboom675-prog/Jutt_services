@@ -1,21 +1,433 @@
-[
-    {
-        "service": 1,
-        "name": "Followers",
-        "type": "Default",
-        "category": "First Category",
-        "rate": "0.90",
-        "min": "50",
-        "max": "10000"
-    },
-    {
-        "service": 2,
-        "name": "Comments",
-        "type": "Custom Comments",
-        "category": "Second Category",
-        "rate": "8",
-        "min": "10",
-        "max": "1500"
-    }
-]
-New order
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHMED JUTT SERVICES - Premium SMM Hub</title>
+    <style>
+        /* VIP Dark Black & Blue Theme Settings */
+        :root {
+            --bg-main: #05070c;       /* ٹوٹلی گہرا بلیک بیک گراؤنڈ */
+            --bg-card: #0f1422;       /* کارڈز کا وی آئی پی ڈارک بلو رنگ */
+            --accent-blue: #00d2ff;   /* برائٹ نیون بلو */
+            --accent-glow: #0086ad;   /* بٹن گلو کے لیے */
+            --accent-green: #00ff87;  /* پرائز اور ایکٹو سٹیٹس کے لیے نیون گرین */
+            --text-main: #ffffff;     /* چمکتا ہوا سفید ٹیکسٹ */
+            --text-muted: #8a99ad;    /* ہلکا گرے ٹیکسٹ */
+            --border-vip: #1e293b;    /* بارڈرز کا رنگ */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 550px; /* موبائل پر بالکل پرفیکٹ فٹ سائز کے لیے */
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        /* مین برانڈ ہیڈر */
+        header {
+            text-align: center;
+            padding: 30px 10px 20px 10px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ffffff, var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* مین سیلر / سروس کارڈ */
+        .seller-card {
+            background: var(--bg-card);
+            border: 2px solid #22314d;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        /* امیج کنٹینر تاکہ سائز آؤٹ نہ ہو */
+        .image-holder {
+            width: 100%;
+            position: relative;
+            background-color: #000;
+            line-height: 0;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 2px solid #22314d;
+        }
+
+        /* "BUY / SELL" اور "NEW" بیج */
+        .badge-buy-sell {
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: linear-gradient(45deg, #ff0055, #ff00aa);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* سیلر کی تفصیلات */
+        .seller-details {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .seller-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .seller-tag {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+            border-bottom: 1px dashed var(--accent-blue);
+            padding-bottom: 2px;
+        }
+
+        /* اکاؤنٹ بائنگ اینڈ سیلنگ کی تفصیلات */
+        .info-box {
+            background: rgba(5, 7, 12, 0.6);
+            border: 1px solid var(--border-vip);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 10px;
+            text-align: right; /* اردو ٹیکسٹ کے لیے بہترین الائنمنٹ */
+            direction: rtl;
+        }
+
+        .info-box h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-vip);
+            padding-bottom: 8px;
+        }
+
+        .info-sub {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding-right: 10px;
+        }
+
+        .info-list li {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list li::before {
+            content: "✓";
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .price-demand {
+            text-align: center;
+            font-weight: bold;
+            color: #ff4757;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            background: rgba(255, 71, 87, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        /* کانٹیکٹ پٹی */
+        .contact-strip {
+            background: linear-gradient(90deg, #101726, #1e293b);
+            border: 1px solid var(--border-vip);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            box-shadow: inset 0 0 10px rgba(0, 210, 255, 0.05);
+        }
+
+        /* سروسز سیکشن */
+        .services-section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .services-section-title::before, .services-section-title::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* وی آئی پی سروس آئٹم */
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-vip);
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.15);
+        }
+
+        .service-left {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .service-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .service-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .service-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        /* آرڈر بٹن */
+        .order-button {
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-glow));
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 210, 255, 0.2);
+            text-decoration: none;
+        }
+
+        .order-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 210, 255, 0.4);
+        }
+
+        /* فوٹر */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-vip);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- مین ہیڈر -->
+        <header>
+            <h1>AHMED JUTT SERVICES</h1>
+            <p>Get High-Quality Social Media Boost & Premium Apps At The Best Prices In Pakistan</p>
+        </header>
+
+        <!-- فرسٹ کارڈ (تصویر اور بائنگ/سیلنگ ڈیٹیل) -->
+        <div class="seller-card">
+            <div class="image-holder">
+                <!-- بیج -->
+                <div class="badge-buy-sell">BUY / SELL</div>
+                
+                <!-- یہاں اپنی پہلی تصویر (جیسے Ather Fareed والی تھی) کا نام یا لنک لکھیں -->
+                <img src="1000035216.jpg" alt="Trusted Seller">
+            </div>
+            
+            <div class="seller-details">
+                <div class="seller-name">ATHER FAREED</div>
+                <div class="seller-tag">Trusted Seller</div>
+
+                <!-- بائنگ / سیلنگ کی تمام معلومات جو تصویر میں تھیں -->
+                <div class="info-box">
+                    <h3>TikTok Account Buying & Sale</h3>
+                    <div class="info-sub">Monitize / Non-Monitize اکاؤنٹس دستیاب ہیں</div>
+                    <ul class="info-list">
+                        <li>TikTok Buy/Sell Account</li>
+                        <li>Followers + Views والے اکاؤنٹ</li>
+                        <li>Secure Deal 100% فل گارنٹی</li>
+                    </ul>
+                    <div class="price-demand">ریٹ: ڈیمانڈ کے مطابق</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کانٹیکٹ پٹی -->
+        <div class="contact-strip">
+            Contact with: ATHER BHAI
+        </div>
+
+        <!-- ٹک ٹاک سروسز ریٹ لسٹ سیکشن -->
+        <div class="services-section-title">TikTok Services</div>
+        
+        <div class="services-container">
+
+            <!-- سروس 1 -->
+            <div class="service-card">
+                <div class="service-left">
+                    <div class="service-name">TikTok Views</div>
+                    <div class="service-desc">Super Fast Delivery</div>
+                </div>
+                <div class="service-right">
+                    <div class="service-price">Rs. 12 / 1K</div>
+                    <a href="#" class="order-button">Order Now</a>
+                </div>
+            </div>
+
+            <!-- سروس 2 -->
+            <div class="service-card">
+                <div class="service-left">
+                    <div class="service-name">TikTok Likes</div>
+                    <div class="service-desc">High Quality Likes</div>
+                </div>
+                <div class="service-right">
+                    <div class="service-price">Rs. 120 / 1K</div>
+                    <a href="#" class="order-button">Order Now</a>
+                </div>
+            </div>
+
+            <!-- سروس 3 -->
+            <div class="service-card">
+                <div class="service-left">
+                    <div class="service-name">TikTok Followers</div>
+                    <div class="service-desc">Stable Profiles</div>
+                </div>
+                <div class="service-right">
+                    <div class="service-price">Rs. 800 / 1K</div>
+                    <a href="#" class="order-button">Order Now</a>
+                </div>
+            </div>
+
+            <!-- سروس 4 -->
+            <div class="service-card">
+                <div class="service-left">
+                    <div class="service-name">TikTok Favorites</div>
+                    <div class="service-desc">Boost Ranking</div>
+                </div>
+                <div class="service-right">
+                    <div class="service-price">Rs. 50 / 1K</div>
+                    <a href="#" class="order-button">Order Now</a>
+                </div>
+            </div>
+
+            <!-- سروس 5 -->
+            <div class="service-card">
+                <div class="service-left">
+                    <div class="service-name">TikTok Custom Comments</div>
+                    <div class="service-desc">Custom Written Comments</div>
+                </div>
+                <div class="service-right">
+                    <div class="service-price">Rs. 800 / 1K</div>
+                    <a href="#" class="order-button">Order Now</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- اگر آپ کے پاس کوئی دوسری تصویر یا پروڈکٹ ہے تو وہ آپ نیچے اسی طرح ایک اور کارڈ بنا کر ایڈ کر سکتے ہیں -->
+        
+        <footer>
+            <p>&copy; 2026 AHMED JUTT SERVICES. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+            </html>
+                        
